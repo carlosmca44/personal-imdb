@@ -9,13 +9,6 @@ const theme = createTheme({
             main: "#FDFF00"
         }
     },
-    overrides: {
-        MuiAppBar: {
-            root: {
-                boxShadow: "none",
-            }
-        }
-    }
 })
 
 export default theme

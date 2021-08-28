@@ -13,6 +13,9 @@ import Spacer from "./Spacer";
 import { FaGithub, FaSearch } from "react-icons/fa";
 
 const useStyles = makeStyles(() => ({
+  root: {
+    boxShadow: "none"
+  },
   form: {
     display: "flex",
     flexDirection: "row",
@@ -36,7 +39,7 @@ const NavBar = () => {
   const classes = useStyles();
   return (
     <>
-      <AppBar>
+      <AppBar className={classes.root}>
         <Toolbar>
           <PersonalLogo />
           <Spacer />
