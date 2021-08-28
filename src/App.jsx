@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import NavBar from "./components/NavBar";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -25,19 +26,22 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <input type="text" value={query} onChange={handleChange} />
-      <button onClick={handleButtonClick}>buscar</button>
-      <ul>
-        {list && list.map((item) => (
-          <li>
-            {item.Title} 
-            {item.Year}
-            <img src={item.Poster} alt={item.Title} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <NavBar />
+      <div>
+        <input type="text" value={query} onChange={handleChange} />
+        <button onClick={handleButtonClick}>buscar</button>
+        <ul>
+          {list && list.map((item) => (
+            <li>
+              {item.Title} 
+              {item.Year}
+              <img src={item.Poster} alt={item.Title} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
