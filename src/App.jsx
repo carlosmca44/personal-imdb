@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import NavBar from "./components/NavBar";
+import FilmsCard from "./components/FilmsCard";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -12,7 +13,7 @@ const App = () => {
     })
       .then(response => {
         setList(response.data.Search)
-        console.log(response.data.Search)
+        console.log(response.data)
       })
       .catch((error) => console.log(error));
   }
@@ -34,9 +35,13 @@ const App = () => {
         <ul>
           {list && list.map((item) => (
             <li>
-              {item.Title} 
-              {item.Year}
-              <img src={item.Poster} alt={item.Title} />
+              <FilmsCard 
+                alt={item.Title}
+                img={item.Poster}
+                title={item.Title}
+                type={item.Type}
+                year={item.Year}
+              /> 
             </li>
           ))}
         </ul>
