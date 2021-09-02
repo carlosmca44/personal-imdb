@@ -14,15 +14,15 @@ import { FaGithub, FaSearch } from "react-icons/fa";
 
 const useStyles = makeStyles(() => ({
   root: {
-    boxShadow: "none"
+    boxShadow: "none",
   },
   form: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   input: {
-    width: "400px"
+    width: "400px",
   },
   submiteButton: {
     width: "50px",
@@ -30,12 +30,12 @@ const useStyles = makeStyles(() => ({
     "&:hover": {
       width: "60px",
       height: "60px",
-      transition: "0.4s"
+      transition: "0.4s",
     },
-  }
+  },
 }));
 
-const NavBar = () => {
+const NavBar = ({ query, onClickButton, onChangeValue }) => {
   const classes = useStyles();
   return (
     <>
@@ -45,10 +45,18 @@ const NavBar = () => {
           <Spacer />
           <FormControl variant="outlined" className={classes.form}>
             <InputLabel>Buscar</InputLabel>
-            <Input className={classes.input} />
-                <IconButton className={classes.submiteButton} type="submite">
-                  <FaSearch color={colors.grey[600]} />
-                </IconButton>
+            <Input
+              className={classes.input}
+              onChange={onChangeValue}
+              value={query}
+            />
+            <IconButton
+              className={classes.submiteButton}
+              type="submite"
+              onClick={onClickButton}
+            >
+              <FaSearch color={colors.grey[600]} />
+            </IconButton>
           </FormControl>
           <Spacer />
           <IconButton className={classes.submiteButton}>
