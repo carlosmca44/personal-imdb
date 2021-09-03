@@ -1,7 +1,6 @@
-import { Container } from "@material-ui/core";
 import axios from "axios";
 import { useState } from "react";
-import FilmsCard from "./FilmsCard";
+import SearchContainer from "./SearchContainer";
 import NavBar from "./NavBar";
 
 const Searcher = () => {
@@ -33,22 +32,9 @@ const Searcher = () => {
         onChangeValue={handleChange}
         onClickButton={handleClickButton}
       />
-      <Container>
-        <ul>
-          {list &&
-            list.map((item) => (
-              <li>
-                <FilmsCard
-                  alt={item.Title}
-                  img={item.Poster}
-                  title={item.Title}
-                  type={item.Type}
-                  year={item.Year}
-                />
-              </li>
-            ))}
-        </ul>
-      </Container>
+      <SearchContainer 
+        list={list}
+      />
     </>
   );
 };
