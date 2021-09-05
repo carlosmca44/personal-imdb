@@ -5,14 +5,15 @@ import {
   CardActions,
   Typography,
   Button,
-  CardActionArea,
+  Tooltip,
+  Zoom,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   root: {
-    width: 140,
-    maxHeight: 350,
+    width: 200,
+    maxHeight: 450,
     borderRadius: 0,
   },
   cardContent: {
@@ -25,6 +26,15 @@ const useStyles = makeStyles({
     lineClamp: 1,
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
+    fontWeight: 500
+  },
+  title: {
+    display: "-webkit-box",
+    overflow: "hidden",
+    lineClamp: 1,
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: "vertical",
+    fontWeight: 700
   },
   btn: {
     width: 100,
@@ -38,6 +48,12 @@ const useStyles = makeStyles({
       border: "2px solid #FDFF00",
     },
   },
+  tooltipCW: {
+    maxWidth: 100,
+    backgroundColor: "#fff",
+    color: "#000",
+    fontWeight: 700
+  },
 });
 
 const FilmsCard = ({ alt, img, title, type, year }) => {
@@ -48,18 +64,33 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
       <CardMedia
         component="img"
         alt={alt}
-        height="200"
-        width="170"
+        height="300"
+        width="200"
         image={img}
       />
       <CardContent className={classes.cardContent}>
-        <CardActionArea>
-          <Typography className={classes.text} gutterBottom variant="overline" component="p">
+        <Tooltip
+          arrow
+          classes={{ tooltip: classes.tooltipCW }}
+          title={title}
+          placement="top-start"
+          TransitionComponent={Zoom}
+        >
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="overline"
+            component="p"
+          >
             {title}
           </Typography>
-        </CardActionArea>
-        <Typography className={classes.text} component="p">{type}</Typography>
-        <Typography className={classes.text} component="p">Año: {year}</Typography>
+        </Tooltip>
+        <Typography className={classes.text} component="p">
+          {type}
+        </Typography>
+        <Typography className={classes.text} component="p">
+          Año: {year}
+        </Typography>
         <CardActions>
           <Button className={classes.btn}>Detalles</Button>
         </CardActions>
