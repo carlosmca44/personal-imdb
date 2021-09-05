@@ -12,8 +12,7 @@ const Searcher = () => {
       url: `${process.env.REACT_APP_API_URL}${query}`,
     })
       .then((response) => {
-        setList(response.data.Search);
-        console.log(response.data);
+        setList(response.data);
       })
       .catch((error) => console.log(error));
   };
