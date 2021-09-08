@@ -9,6 +9,9 @@ import {
   Zoom,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import axios from "axios";
+import { useState } from "react";
+import FilmsInfo from "./FilmsInfo";
 
 const useStyles = makeStyles({
   root: {
@@ -58,6 +61,27 @@ const useStyles = makeStyles({
 
 const FilmsCard = ({ alt, img, title, type, year }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false)
+  const [data, setData] = useState([])
+
+  const fetchData = async () => {
+    await axios({
+      url: `${process.env.REACT_APP_API_URL}t=${title}&plot=full`,
+    })
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleClickOpen = () => {
+    fetchData()
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
     <Card className={classes.root}>
@@ -92,8 +116,15 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
           Año: {year}
         </Typography>
         <CardActions>
-          <Button className={classes.btn}>Detalles</Button>
+          <Button className={classes.btn} onClick={handleClickOpen}>Detalles</Button>
         </CardActions>
+        <FilmsInfo 
+          open={open}
+          close={handleClose}
+          title={title}
+          poster={data["Poster"]}
+          description={data["Plot"]}
+        />
       </CardContent>
     </Card>
   );

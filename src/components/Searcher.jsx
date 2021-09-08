@@ -10,7 +10,7 @@ const Searcher = () => {
 
   const fetchData = async () => {
     await axios({
-      url: `${process.env.REACT_APP_API_URL}${query}&page=${page}`,
+      url: `${process.env.REACT_APP_API_URL}s=${query}&page=${page}`,
     })
       .then((response) => {
         setList(response.data);
