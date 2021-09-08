@@ -6,10 +6,11 @@ import NavBar from "./NavBar";
 const Searcher = () => {
   const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
+  const [page, setPage] = useState(1);
 
   const fetchData = async () => {
     await axios({
-      url: `${process.env.REACT_APP_API_URL}${query}`,
+      url: `${process.env.REACT_APP_API_URL}${query}&page=${page}`,
     })
       .then((response) => {
         setList(response.data);
@@ -19,6 +20,11 @@ const Searcher = () => {
 
   const handleChange = (event) => {
     setQuery(event.target.value);
+  };
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+    fetchData();
   };
 
   const handleClickButton = () => {
@@ -31,8 +37,10 @@ const Searcher = () => {
         onChangeValue={handleChange}
         onClickButton={handleClickButton}
       />
-      <SearchContainer 
+      <SearchContainer
         list={list}
+        page={page}
+        handleChangePage={handleChangePage}
       />
     </>
   );

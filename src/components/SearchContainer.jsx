@@ -1,22 +1,37 @@
 import { Container, Grid } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/styles";
 import FilmsCard from "./FilmsCard";
 import IArea from "./InformativeArea";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   root: {
     paddingTop: 20,
     paddingBottom: 20,
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 30,
+    },
   },
-  gridItem: {},
-});
+  pagination: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: 30,
+    backgroundColor: "primary",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 0,
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 40,
+    },
+  },
+}));
 
 const rQuery = ["Movie not found!", "Incorrect IMDb ID."];
 
-const SearchContainer = ({ list }) => {
+const SearchContainer = ({ list, page, handleChangePage }) => {
   const classes = useStyle();
-  var info = "";
 
+  var info = "";
   if (list["Error"] === rQuery[0]) info = rQuery[0];
   if (list["Error"] === rQuery[1]) info = rQuery[1];
 
@@ -27,20 +42,31 @@ const SearchContainer = ({ list }) => {
       ) : list["Response"] === "False" ? (
         <IArea errorI={info} />
       ) : (
-        <Grid container spacing={3} justifyContent="center">
-          {list["Search"] &&
-            list["Search"].map((item) => (
-              <Grid key={item.imdbID} item className={classes.gridItem}>
-                <FilmsCard
-                  alt={item.Title}
-                  img={item.Poster}
-                  title={item.Title}
-                  type={item.Type}
-                  year={item.Year}
-                />
-              </Grid>
-            ))}
-        </Grid>
+        <>
+          <Pagination
+            className={classes.pagination}
+            count={parseInt(list["totalResults"]) - 1}
+            color="primary"
+            shape={"rounded"}
+            page={page}
+            onChange={handleChangePage}
+            hidden={list["Search"] !== undefined ? false : true}
+          />
+          <Grid container spacing={3} justifyContent="center">
+            {list["Search"] &&
+              list["Search"].map((item) => (
+                <Grid key={item.imdbID} item>
+                  <FilmsCard
+                    alt={item.Title}
+                    img={item.Poster}
+                    title={item.Title}
+                    type={item.Type}
+                    year={item.Year}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </>
       )}
     </Container>
   );
