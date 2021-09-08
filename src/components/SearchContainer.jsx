@@ -15,8 +15,13 @@ const useStyle = makeStyles((theme) => ({
   pagination: {
     display: "flex",
     justifyContent: "center",
+    margin: "auto",
     marginBottom: 30,
-    backgroundColor: "primary",
+    backgroundColor: "#fff",
+    paddingBottom: 5,
+    paddingTop: 5,
+    width: "max-content",
+    borderRadius: 10,
     [theme.breakpoints.down("sm")]: {
       marginTop: 0,
     },
