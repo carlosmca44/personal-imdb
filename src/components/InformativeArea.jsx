@@ -1,8 +1,11 @@
 import { Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   root: {
+    [theme.breakpoints.down("sm")]: {
+      width: "90vw",
+    },
     width: "50vw",
     height: "50vh",
     border: "2px solid #fff",
@@ -17,7 +20,7 @@ const useStyle = makeStyles({
     maxWidth: 300,
     textAlign: "center",
   },
-});
+}));
 
 const rQuery = ["Movie not found!", "Incorrect IMDb ID."];
 

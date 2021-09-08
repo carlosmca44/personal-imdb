@@ -2,37 +2,55 @@ import {
   AppBar,
   FormControl,
   Toolbar,
-  InputLabel,
-  Input,
-  colors,
   IconButton,
+  InputBase,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonalLogo from "./Logo";
-import Spacer from "./Spacer";
 import { FaGithub, FaSearch } from "react-icons/fa";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     boxShadow: "none",
+    height: "max-content",
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: 20,
+      paddingTop: 10
+    }
+  },
+  toolbar: {
+    [theme.breakpoints.down('xs')]: {
+      display: "flex",
+      flexDirection: "column",
+    }
   },
   form: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    margin: "auto",
   },
   input: {
-    width: "400px",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    height: 30,
+    width: 400,
+    minWidth: 200,
+    paddingLeft: 10,
+    [theme.breakpoints.down("xs")]: {
+      width: 280,
+    }
   },
-  submiteButton: {
-    width: "50px",
-    height: "50px",
-    "&:hover": {
-      width: "60px",
-      height: "60px",
-      transition: "0.4s",
-    },
+  gitlink: {
+    width: 50,
+    height: 50,
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   },
+  searchbtn: {
+    
+  }
 }));
 
 const NavBar = ({ query, onClickButton, onChangeValue }) => {
@@ -40,26 +58,23 @@ const NavBar = ({ query, onClickButton, onChangeValue }) => {
   return (
     <>
       <AppBar className={classes.root}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <PersonalLogo />
-          <Spacer />
-          <FormControl variant="outlined" className={classes.form}>
-            <InputLabel>Buscar</InputLabel>
-            <Input
+          <FormControl className={classes.form}>
+            <InputBase
               className={classes.input}
-              onChange={onChangeValue}
               value={query}
+              onChange={onChangeValue}
+              placeholder={"Buscar"}
             />
             <IconButton
-              className={classes.submiteButton}
-              type="submite"
+              className={classes.searchbtn}
               onClick={onClickButton}
             >
-              <FaSearch color={colors.grey[600]} />
+              <FaSearch />
             </IconButton>
           </FormControl>
-          <Spacer />
-          <IconButton className={classes.submiteButton}>
+          <IconButton className={classes.gitlink}>
             <FaGithub />
           </IconButton>
         </Toolbar>
