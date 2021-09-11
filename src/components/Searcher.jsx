@@ -8,9 +8,9 @@ const Searcher = () => {
   const [list, setList] = useState([]);
   const [page, setPage] = useState(1);
 
-  const fetchData = async () => {
+  const fetchData = async (value) => {
     await axios({
-      url: `${process.env.REACT_APP_API_URL}s=${query}&page=${page}`,
+      url: `${process.env.REACT_APP_API_URL}s=${query}&page=${value}`,
     })
       .then((response) => {
         setList(response.data);
@@ -23,12 +23,13 @@ const Searcher = () => {
   };
 
   const handleChangePage = (event, value) => {
-    setPage(value);
-    fetchData();
+    fetchData(value);
+    setPage(value)
   };
 
   const handleClickButton = () => {
-    fetchData();
+    fetchData(page);
+    console.log(page)
   };
   return (
     <>
