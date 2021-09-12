@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/styles";
 import axios from "axios";
 import { useState } from "react";
 import FilmsInfo from "./FilmsInfo";
+import NoImage from "./NoImage";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
     lineClamp: 1,
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    fontWeight: 500
+    fontWeight: 500,
   },
   title: {
     display: "-webkit-box",
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
     lineClamp: 1,
     WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    fontWeight: 700
+    fontWeight: 700,
   },
   btn: {
     width: 100,
@@ -55,14 +56,14 @@ const useStyles = makeStyles({
     maxWidth: 100,
     backgroundColor: "#fff",
     color: "#000",
-    fontWeight: 700
+    fontWeight: 700,
   },
 });
 
 const FilmsCard = ({ alt, img, title, type, year }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false)
-  const [data, setData] = useState([])
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
     await axios({
@@ -75,23 +76,27 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
   };
 
   const handleClickOpen = () => {
-    fetchData()
-    setOpen(true)
-  }
+    fetchData();
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        component="img"
-        alt={alt}
-        height="300"
-        width="200"
-        image={img}
-      />
+      {img === "N/A" ? (
+        <NoImage />
+      ) : (
+        <CardMedia
+          component="img"
+          alt={alt}
+          height="300"
+          width="200"
+          image={img}
+        />
+      )}
       <CardContent className={classes.cardContent}>
         <Tooltip
           arrow
@@ -116,9 +121,11 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
           Año: {year}
         </Typography>
         <CardActions>
-          <Button className={classes.btn} onClick={handleClickOpen}>Detalles</Button>
+          <Button className={classes.btn} onClick={handleClickOpen}>
+            Detalles
+          </Button>
         </CardActions>
-        <FilmsInfo 
+        <FilmsInfo
           open={open}
           close={handleClose}
           title={title}

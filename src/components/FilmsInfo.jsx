@@ -1,10 +1,6 @@
-import {
-  Box,
-  Dialog,
-  DialogTitle,
-  Typography,
-} from "@material-ui/core";
+import { Box, Dialog, DialogTitle, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import NoImage from "./NoImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -20,19 +16,19 @@ const useStyles = makeStyles((theme) => ({
   information: {
     display: "flex",
     [theme.breakpoints.down("sm")]: {
-      display: "block"
-    }
+      display: "block",
+    },
   },
   poster: {
     width: "auto",
     height: "70vh",
     alignSelf: "center",
     [theme.breakpoints.down("sm")]: {
-      alignSelf: "start"
+      alignSelf: "start",
     },
     [theme.breakpoints.down("xs")]: {
-      alignSelf: "center"
-    }
+      alignSelf: "center",
+    },
   },
   sInfo: {
     marginLeft: 15,
@@ -44,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       marginLeft: 20,
       marginRight: 20,
-    }
-  }
+    },
+  },
 }));
 
 const FilmsInfo = ({ open, close, title, poster, description }) => {
@@ -59,10 +55,15 @@ const FilmsInfo = ({ open, close, title, poster, description }) => {
       onClose={close}
     >
       <Box className={classes.boxRoot}>
-        <img className={classes.poster} alt={title} src={poster} />
+        {poster === "N/A" ? (
+          <NoImage />
+        ) : (
+          <img className={classes.poster} alt={title} src={poster} />
+        )}
+
         <Box className={classes.infoContent}>
           <DialogTitle>{title}</DialogTitle>
-          <Box className={classes.information} >
+          <Box className={classes.information}>
             <Typography className={classes.sInfo}>nacionalidad</Typography>
             <Typography className={classes.sInfo}>director</Typography>
             <Typography className={classes.sInfo}>genero</Typography>
