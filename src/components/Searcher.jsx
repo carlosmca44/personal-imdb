@@ -28,8 +28,8 @@ const Searcher = () => {
   };
 
   const handleClickButton = () => {
-    fetchData(page);
-    console.log(page)
+    setPage(1)
+    fetchData(1);
   };
   return (
     <>

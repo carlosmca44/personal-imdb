@@ -50,7 +50,7 @@ const SearchContainer = ({ list, page, handleChangePage }) => {
         <>
           <Pagination
             className={classes.pagination}
-            count={parseInt(list["totalResults"]) - 1}
+            count={Math.floor(parseInt(list["totalResults"])/10)+1}
             color="primary"
             shape={"rounded"}
             page={page}
