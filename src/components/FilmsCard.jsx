@@ -7,6 +7,7 @@ import {
   Button,
   Tooltip,
   Zoom,
+  Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import axios from "axios";
@@ -14,15 +15,32 @@ import { useState } from "react";
 import FilmsInfo from "./FilmsInfo";
 import NoImage from "./NoImage";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 200,
     maxHeight: 450,
     borderRadius: 0,
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      width: 340,
+      maxHeight: 100,
+    },
   },
   cardContent: {
     backgroundColor: "#000",
     color: "#fff",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      width: "inherit",
+    },
+  },
+  cardMedia: {
+    height: 300,
+    width: 200,
+    [theme.breakpoints.down("sm")]: {
+      height: 100,
+      width: 66,
+    },
   },
   text: {
     display: "-webkit-box",
@@ -58,7 +76,7 @@ const useStyles = makeStyles({
     color: "#000",
     fontWeight: 700,
   },
-});
+}));
 
 const FilmsCard = ({ alt, img, title, type, year }) => {
   const classes = useStyles();
@@ -90,37 +108,38 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
         <NoImage />
       ) : (
         <CardMedia
+          className={classes.cardMedia}
           component="img"
           alt={alt}
-          height="300"
-          width="200"
           image={img}
         />
       )}
       <CardContent className={classes.cardContent}>
-        <Tooltip
-          arrow
-          classes={{ tooltip: classes.tooltipCW }}
-          title={title}
-          placement="top-start"
-          TransitionComponent={Zoom}
-        >
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="overline"
-            component="p"
+        <Box>
+          <Tooltip
+            arrow
+            classes={{ tooltip: classes.tooltipCW }}
+            title={title}
+            placement="top-start"
+            TransitionComponent={Zoom}
           >
-            {title}
+            <Typography
+              className={classes.title}
+              gutterBottom
+              variant="overline"
+              component="p"
+            >
+              {title}
+            </Typography>
+          </Tooltip>
+          <Typography className={classes.text} component="p">
+            {type}
           </Typography>
-        </Tooltip>
-        <Typography className={classes.text} component="p">
-          {type}
-        </Typography>
-        <Typography className={classes.text} component="p">
-          Año: {year}
-        </Typography>
-        <CardActions>
+          <Typography className={classes.text} component="p">
+            Año: {year}
+          </Typography>
+        </Box>
+        <CardActions style={{ marginLeft: "auto" }}>
           <Button className={classes.btn} onClick={handleClickOpen}>
             Detalles
           </Button>
