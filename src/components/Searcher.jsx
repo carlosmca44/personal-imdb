@@ -25,6 +25,9 @@ const Searcher = () => {
   const handleChangePage = (event, value) => {
     fetchData(value);
     setPage(value)
+    window.scrollTo({
+      top: 0
+    })
   };
 
   const handleClickButton = () => {
