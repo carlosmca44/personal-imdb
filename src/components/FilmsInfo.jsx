@@ -31,8 +31,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sInfo: {
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 10,
+    marginRight: 10,
+    border: "1px solid black",
+    padding: "0px 4px 0px 4px",
+    borderRadius: 8,
   },
   infoContent: {
     marginLeft: 40,
@@ -44,7 +47,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FilmsInfo = ({ open, close, title, poster, description }) => {
+const FilmsInfo = ({
+  open,
+  close,
+  title,
+  year,
+  genre,
+  country,
+  director,
+  rating,
+  poster,
+  description,
+}) => {
   const classes = useStyles();
   return (
     <Dialog
@@ -64,15 +78,13 @@ const FilmsInfo = ({ open, close, title, poster, description }) => {
         <Box className={classes.infoContent}>
           <DialogTitle>{title}</DialogTitle>
           <Box className={classes.information}>
-            <Typography className={classes.sInfo}>nacionalidad</Typography>
-            <Typography className={classes.sInfo}>director</Typography>
-            <Typography className={classes.sInfo}>genero</Typography>
-            <Typography className={classes.sInfo}>anno</Typography>
-            <Typography className={classes.sInfo}>puntuacion</Typography>
+            Pais: <Typography className={classes.sInfo}>{country}</Typography>
+            Director: <Typography className={classes.sInfo}>{director}</Typography>
+            Género: <Typography className={classes.sInfo}>{genre}</Typography>
+            Año: <Typography className={classes.sInfo}>{year}</Typography>
+            Puntuación: <Typography className={classes.sInfo}>{rating}</Typography>
           </Box>
           <Typography>{description}</Typography>
-          <Typography>anno</Typography>
-          <Typography>productora</Typography>
         </Box>
       </Box>
     </Dialog>
