@@ -29,7 +29,10 @@ const useStyle = makeStyles((theme) => ({
     maxWidth: 500,
   },
   alert: {
-    
+    maxWidth: 600,
+    [theme.breakpoints.down('sm')]: {
+      width: "auto"
+    }
   },
 }));
 
@@ -44,9 +47,7 @@ const feedback = [
 
 const IArea = ({ errorI }) => {
   const classes = useStyle();
-  const [open, setOpen] = useState(
-    errorI === rQuery[0] || errorI === rQuery[1] ? true : true
-  );
+  const [open, setOpen] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
