@@ -1,4 +1,4 @@
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/styles";
 import FilmsCard from "./FilmsCard";
@@ -12,11 +12,15 @@ const useStyle = makeStyles((theme) => ({
       marginTop: 30,
     },
   },
+  actualPage: {
+    color: "#fff",
+    marginLeft: "10vw",
+    marginBottom: 20,
+  },
   pagination: {
-    display: "flex",
-    justifyContent: "center",
     margin: "auto",
     marginBottom: 30,
+    marginTop: 30,
     backgroundColor: "#fff",
     paddingBottom: 5,
     paddingTop: 5,
@@ -36,6 +40,8 @@ const rQuery = ["Movie not found!", "Incorrect IMDb ID."];
 const SearchContainer = ({ list, page, handleChangePage }) => {
   const classes = useStyle();
 
+  const nPages = Math.floor(parseInt(list["totalResults"])/10)+1
+
   var info = "";
   if (list["Error"] === rQuery[0]) info = rQuery[0];
   if (list["Error"] === rQuery[1]) info = rQuery[1];
@@ -48,15 +54,9 @@ const SearchContainer = ({ list, page, handleChangePage }) => {
         <IArea errorI={info} />
       ) : (
         <>
-          <Pagination
-            className={classes.pagination}
-            count={Math.floor(parseInt(list["totalResults"])/10)+1}
-            color="primary"
-            shape={"rounded"}
-            page={page}
-            onChange={handleChangePage}
-            hidden={list["Search"] !== undefined ? false : true}
-          />
+          <Typography className={classes.actualPage}>
+            página {page} de {nPages}
+          </Typography>
           <Grid container spacing={3} justifyContent="center">
             {list["Search"] &&
               list["Search"].map((item) => (
@@ -71,6 +71,15 @@ const SearchContainer = ({ list, page, handleChangePage }) => {
                 </Grid>
               ))}
           </Grid>
+          <Pagination
+            className={classes.pagination}
+            count={nPages}
+            color="primary"
+            shape={"rounded"}
+            page={page}
+            onChange={handleChangePage}
+            hidden={list["Search"] !== undefined ? false : true}
+          />
         </>
       )}
     </Container>

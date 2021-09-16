@@ -148,6 +148,11 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
           open={open}
           close={handleClose}
           title={title}
+          year={data["Year"]}
+          genre={data["Genre"]}
+          country={data["Country"]}
+          director={data["Director"]}
+          rating={data["imdbRating"]}
           poster={data["Poster"]}
           description={data["Plot"]}
         />
