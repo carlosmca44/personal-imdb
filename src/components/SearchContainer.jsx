@@ -20,17 +20,14 @@ const useStyle = makeStyles((theme) => ({
   pagination: {
     margin: "auto",
     marginBottom: 30,
-    marginTop: 30,
+    marginTop: "5%",
     backgroundColor: "#fff",
     paddingBottom: 5,
     paddingTop: 5,
     width: "max-content",
     borderRadius: 10,
     [theme.breakpoints.down("sm")]: {
-      marginTop: 0,
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginTop: 40,
+      marginTop: "10%",
     },
   },
 }));
