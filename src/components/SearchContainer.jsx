@@ -37,6 +37,34 @@ const rQuery = ["Movie not found!", "Incorrect IMDb ID."];
 const SearchContainer = ({ list, page, handleChangePage }) => {
   const classes = useStyle();
 
+  var newArr = []
+  if (list["Response"] !== "False" && list.length !== 0) {
+    var repeated = false
+    for (let i = 0; i < list["Search"].length; i++) {
+      for (let j = i+1; j < list["Search"].length; j++) {
+        console.log(j)
+        console.log(list["Search"].length)
+        if (j === list["Search"].length) 
+          console.log(list["Search"][i])
+        if (list["Search"][i].imdbID !== list["Search"][j].imdbID) {
+          repeated = true
+        }
+      }
+      if (repeated) {
+        newArr.push(list["Search"][i])
+        repeated = false
+      }
+    }
+  }
+    /*list["Search"].foreach (el => {
+      if (list["Search"].indexOf(el) + 1 > list["Search"].length - 1) {
+        break
+      }
+      if (el.imdbID === list["Search"][list["Search"].indexOf(el) + 1].imdbID){
+        list["Search"].splice(list["Search"].indexOf(el), 1)
+      }
+    })*/
+
   const nPages = Math.floor(parseInt(list["totalResults"])/10)+1
 
   var info = "";
@@ -55,8 +83,8 @@ const SearchContainer = ({ list, page, handleChangePage }) => {
             página {page} de {nPages}
           </Typography>
           <Grid container spacing={3} justifyContent="center">
-            {list["Search"] &&
-              list["Search"].map((item) => (
+            {newArr &&
+              newArr.map((item) => (
                 <Grid key={item.imdbID} item>
                   <FilmsCard
                     alt={item.Title}
