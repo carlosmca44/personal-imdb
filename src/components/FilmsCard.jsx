@@ -85,8 +85,10 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
 
   const fetchData = async () => {
     await axios({
-      url: `${process.env.REACT_APP_API_URL}t=${title}&y=${year}&type=${type}&plot=full`,
-
+      url: `${process.env.REACT_APP_API_URL}t=${title}&y=${year.slice(
+        0,
+        4
+      )}&type=${type === "game" ? "" : type}&plot=full`,
     })
       .then((response) => {
         setData(response.data);
