@@ -14,18 +14,21 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import PersonalLogo from "./Logo";
 import { FaCaretDown, FaGithub, FaSearch } from "react-icons/fa";
+import { AiOutlineCloseCircle } from "react-icons/ai"
 import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     boxShadow: "none",
     height: "max-content",
+    //backgroundColor: "transparent",
     [theme.breakpoints.down("xs")]: {
       marginBottom: 20,
       paddingTop: 10,
     },
   },
   toolbar: {
+    backgroundColor: "transparent",
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       flexDirection: "column",
@@ -36,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
     margin: "auto",
+    /*boxShadow: "3px 3px 15px gray",
+    borderRadius: 8*/
   },
   input: {
     backgroundColor: "#fff",
@@ -47,6 +52,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       width: 280,
     },
+  },
+  clear: {
+    marginRight: 15,
+    "&:hover": {
+      cursor: "pointer"
+    }
   },
   gitlink: {
     width: 50,
@@ -101,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 const typeOptions = ["Todo", "Pelicula", "Serie"];
 //const yearOptions = [];
 
-const NavBar = ({ query, onClickButton, onChangeValue, onChangeType }) => {
+const NavBar = ({ query, onClickButton, onChangeValue, onChangeType, clear }) => {
   const classes = useStyles();
   const [anchorType, setAnchorType] = useState(null);
   const [anchorYear, setAnchorYear] = useState(null);
@@ -135,6 +146,9 @@ const NavBar = ({ query, onClickButton, onChangeValue, onChangeType }) => {
               value={query}
               onChange={onChangeValue}
               placeholder={"Buscar"}
+              endAdornment={
+                <AiOutlineCloseCircle className={classes.clear} onClick={clear} />
+              }
             />
             <IconButton className={classes.searchbtn} onClick={onClickButton}>
               <FaSearch />

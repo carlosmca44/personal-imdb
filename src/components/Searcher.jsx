@@ -18,7 +18,7 @@ const Searcher = () => {
       .then((response) => {
         setList(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
   };
 
   const handleChange = (event) => {
@@ -41,6 +41,10 @@ const Searcher = () => {
     setPage(1);
     fetchData(1, typeQ);
   };
+
+  const handleClear = () => {
+    setQuery("")
+  }
   return (
     <>
       <NavBar
@@ -48,6 +52,7 @@ const Searcher = () => {
         onChangeValue={handleChange}
         onClickButton={handleClickButton}
         onChangeType={handleChangeType}
+        clear={handleClear}
       />
       <SearchContainer
         list={list}
