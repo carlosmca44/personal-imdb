@@ -56,14 +56,6 @@ const SearchContainer = ({ list, page, handleChangePage }) => {
       }
     }
   }
-    /*list["Search"].foreach (el => {
-      if (list["Search"].indexOf(el) + 1 > list["Search"].length - 1) {
-        break
-      }
-      if (el.imdbID === list["Search"][list["Search"].indexOf(el) + 1].imdbID){
-        list["Search"].splice(list["Search"].indexOf(el), 1)
-      }
-    })*/
 
   const nPages = Math.floor(parseInt(list["totalResults"])/10)+1
 
