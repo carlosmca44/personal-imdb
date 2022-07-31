@@ -3,8 +3,8 @@ import {
   Zoom,
   Box,
 } from "@material-ui/core";
-import axios from "axios";
 import { useState } from "react";
+import useAxios from "../../hooks/useAxios";
 import FilmsInfo from "../FilmInfoDialog/FilmsInfo";
 import NoImage from "../NoImage/NoImage";
 import {
@@ -19,23 +19,11 @@ import {
 
 const FilmsCard = ({ alt, img, title, type, year }) => {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-    await axios({
-      url: `${process.env.REACT_APP_API_URL}t=${title}&y=${year.slice(
-        0,
-        4
-      )}&type=${type === "game" ? "" : type}&plot=full`,
-    })
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => console.log(error));
-  };
+  const {response, fetchData} = useAxios("t")
 
-  const handleClickOpen = () => {
-    fetchData();
+  const handleClickOpenDetails = () => {
+    fetchData(title, null, null, "full");
     setOpen(true);
   };
 
@@ -67,7 +55,7 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
           <Texts>Año: {year}</Texts>
         </Box>
         <CardActions style={{ marginLeft: "auto" }}>
-          <DetailsButton onClick={handleClickOpen}>
+          <DetailsButton onClick={handleClickOpenDetails}>
             Detalles
           </DetailsButton>
         </CardActions>
@@ -75,13 +63,13 @@ const FilmsCard = ({ alt, img, title, type, year }) => {
           open={open}
           close={handleClose}
           title={title}
-          year={data["Year"]}
-          genre={data["Genre"]}
-          country={data["Country"]}
-          director={data["Director"]}
-          rating={data["imdbRating"]}
-          poster={data["Poster"]}
-          description={data["Plot"]}
+          year={response["Year"]}
+          genre={response["Genre"]}
+          country={response["Country"]}
+          director={response["Director"]}
+          rating={response["imdbRating"]}
+          poster={response["Poster"]}
+          description={response["Plot"]}
         />
       </CardContent>
     </FilmCardRoot>

@@ -1,36 +1,25 @@
-import axios from "axios";
 import { useState } from "react";
 import SearchContainer from "./SearchContainer/SearchContainer";
 import NavBar from "./Navbar/NavBar";
+import useAxios from "../hooks/useAxios";
 
 const Searcher = () => {
   const [query, setQuery] = useState("");
-  const [list, setList] = useState([]);
   const [page, setPage] = useState(1);
-  const [typeQ, setTypeQ] = useState(null);
+  const [filterType, setFilterType] = useState(null);
 
-  const fetchData = async (pageValue, type) => {
-    await axios({
-      url: `${process.env.REACT_APP_API_URL}s=${query}&page=${pageValue}&type=${
-        type === "Pelicula" ? "movie" : type === "Serie" ? "series" : ""
-      }`,
-    })
-      .then((response) => {
-        setList(response.data);
-      })
-      .catch((error) => console.log(error))
-  };
+  const { response, fetchData } = useAxios("s");
 
   const handleChange = (event) => {
     setQuery(event.target.value);
   };
 
   const handleChangeType = (value) => {
-    setTypeQ(value);
+    setFilterType(value);
   };
 
   const handleChangePage = (event, value) => {
-    fetchData(value, typeQ);
+    fetchData(query, value, filterType)
     setPage(value);
     window.scrollTo({
       top: 0,
@@ -39,8 +28,8 @@ const Searcher = () => {
 
   const handleClickButton = (event, _value) => {
     event.preventDefault();
+    fetchData(query, page, filterType)
     setPage(1);
-    fetchData(1, typeQ);
   };
 
   const handleClear = () => {
@@ -56,7 +45,7 @@ const Searcher = () => {
         clear={handleClear}
       />
       <SearchContainer
-        list={list}
+        list={response}
         page={page}
         handleChangePage={handleChangePage}
       />

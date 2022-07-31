@@ -6,22 +6,6 @@ import { PageCount, RootContainer, Pagination } from "./styles";
 const SearchContainer = ({ list, page, handleChangePage }) => {
   const rQuery = ["Movie not found!", "Incorrect IMDb ID."];
 
-  var newArr = []
-  if (list["Response"] !== "False" && list.length !== 0) {
-    var repeated = false
-    for (let i = 0; i < list["Search"].length; i++) {
-      for (let j = i + 1; j < list["Search"].length; j++) {
-        if (list["Search"][i].imdbID !== list["Search"][j].imdbID) {
-          repeated = true
-        }
-      }
-      if (repeated) {
-        newArr.push(list["Search"][i])
-        repeated = false
-      }
-    }
-  }
-
   const nPages = Math.floor(parseInt(list["totalResults"]) / 10) + 1
 
   var info = "";
@@ -40,8 +24,8 @@ const SearchContainer = ({ list, page, handleChangePage }) => {
             página {page} de {nPages}
           </PageCount>
           <Grid container spacing={3} justifyContent="center">
-            {newArr &&
-              newArr.map((item) => (
+            {list["Search"] &&
+              list["Search"].map((item) => (
                 <Grid key={item.imdbID} item>
                   <FilmsCard
                     alt={item.Title}
