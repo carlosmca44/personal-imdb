@@ -2,6 +2,7 @@ import { useState } from "react";
 import SearchContainer from "./SearchContainer/SearchContainer";
 import NavBar from "./Navbar/NavBar";
 import useAxios from "../hooks/useAxios";
+import Filters from "./Filters/Filters";
 
 const Searcher = () => {
   const [query, setQuery] = useState("");
@@ -10,15 +11,15 @@ const Searcher = () => {
 
   const { response, fetchData } = useAxios("s");
 
-  const handleChange = (event) => {
+  const handleChangeQuery = (event) => {
     setQuery(event.target.value);
   };
 
-  const handleChangeType = (value) => {
+  const handleChangeFilterType = (value) => {
     setFilterType(value);
   };
 
-  const handleChangePage = (event, value) => {
+  const handleChangePage = (_event, value) => {
     fetchData(query, value, filterType)
     setPage(value);
     window.scrollTo({
@@ -35,14 +36,17 @@ const Searcher = () => {
   const handleClear = () => {
     setQuery("")
   }
+
   return (
     <>
       <NavBar
         query={query}
-        onChangeValue={handleChange}
+        onChangeValue={handleChangeQuery}
         onClickButton={handleClickButton}
-        onChangeType={handleChangeType}
         clear={handleClear}
+      />
+      <Filters
+        onChangeType={handleChangeFilterType}
       />
       <SearchContainer
         list={response}
