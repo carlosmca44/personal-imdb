@@ -1,40 +1,6 @@
-import { Paper, Snackbar, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Typography } from "@material-ui/core";
 import { useState } from "react";
-
-const useStyle = makeStyles((theme) => ({
-  root: {
-    [theme.breakpoints.down("sm")]: {
-      width: "90vw",
-      paddingBottom: 10,
-      paddingTop: 10,
-    },
-    width: "50vw",
-    height: "50vh",
-    border: "2px solid #fff",
-    backgroundColor: "transparent",
-    margin: "auto",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "#c4c4c4",
-    textAlign: "center",
-  },
-  text: {
-    maxWidth: 300,
-  },
-  text2: {
-    marginTop: 10,
-    maxWidth: 500,
-  },
-  alert: {
-    maxWidth: 600,
-    [theme.breakpoints.down('sm')]: {
-      width: "auto"
-    }
-  },
-}));
+import { Alert, RootContainer } from "./styles";
 
 const rQuery = ["Movie not found!", "Incorrect IMDb ID."];
 
@@ -45,8 +11,7 @@ const feedback = [
   "Descubre género, sinopsis, puntuaciones y más de tus series, películas y videojuegos favoritos",
 ];
 
-const IArea = ({ errorI }) => {
-  const classes = useStyle();
+const InformativeArea = ({ errorI }) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
@@ -55,24 +20,23 @@ const IArea = ({ errorI }) => {
 
   return (
     <>
-      <Paper className={classes.root}>
-        <Typography variant="h2" className={classes.text}>
+      <RootContainer>
+        <Typography variant="h2">
           {errorI === rQuery[0]
             ? emoji[0]
             : errorI === rQuery[1]
-            ? emoji[1]
-            : emoji[2]}
+              ? emoji[1]
+              : emoji[2]}
         </Typography>
-        <Typography className={classes.text} component="p">
+        <Typography component="p" style={{ maxWidth: 300 }}>
           {errorI === rQuery[0]
             ? feedback[0]
             : errorI === rQuery[1]
-            ? feedback[1]
-            : feedback[2]}
+              ? feedback[1]
+              : feedback[2]}
         </Typography>
-      </Paper>
-      <Snackbar
-        className={classes.alert}
+      </RootContainer>
+      <Alert
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
@@ -88,4 +52,4 @@ const IArea = ({ errorI }) => {
   );
 };
 
-export default IArea;
+export default InformativeArea;

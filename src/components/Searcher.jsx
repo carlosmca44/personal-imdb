@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import SearchContainer from "./SearchContainer";
-import NavBar from "./NavBar";
+import SearchContainer from "./SearchContainer/SearchContainer";
+import NavBar from "./Navbar/NavBar";
 
 const Searcher = () => {
   const [query, setQuery] = useState("");
@@ -37,7 +37,8 @@ const Searcher = () => {
     });
   };
 
-  const handleClickButton = () => {
+  const handleClickButton = (event, _value) => {
+    event.preventDefault();
     setPage(1);
     fetchData(1, typeQ);
   };
