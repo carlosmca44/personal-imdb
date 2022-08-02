@@ -11,9 +11,12 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 export const AppBar = styled(MuiAppBar)(({ theme }) => ({
   boxShadow: "none",
   position: "static",
-  [theme.breakpoints.down("xs")]: {
+  backgroundColor: "transparent",
+  paddingTop: 30,
+  paddingBottom: 30,
+  [theme.breakpoints.down("sm")]: {
     marginBottom: 20,
-    paddingTop: 10,
+    paddingBottom: 0,
   },
 }));
 
@@ -36,7 +39,8 @@ export const Input = styled(InputBase)(({ theme }) => ({
   height: 30,
   width: 400,
   minWidth: 200,
-  paddingLeft: 10,
+  padding: "17px 0px 17px 10px",
+  boxShadow: "3px 3px 5px #d4d4d4",
   [theme.breakpoints.down("xs")]: {
     width: 280,
   },
@@ -52,6 +56,7 @@ export const ClearButton = styled(AiOutlineCloseCircle)(() => ({
 export const GitLink = styled(IconButton)(({ theme }) => ({
   width: 50,
   height: 50,
+  marginLeft: 20,
   [theme.breakpoints.down("sm")]: {
     display: "none",
   },

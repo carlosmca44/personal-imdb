@@ -2,7 +2,6 @@ import { useState } from "react";
 import SearchContainer from "./SearchContainer/SearchContainer";
 import NavBar from "./Navbar/NavBar";
 import useAxios from "../hooks/useAxios";
-import Filters from "./Filters/Filters";
 
 const Searcher = () => {
   const [query, setQuery] = useState("");
@@ -44,9 +43,7 @@ const Searcher = () => {
         onChangeValue={handleChangeQuery}
         onClickButton={handleClickButton}
         clear={handleClear}
-      />
-      <Filters
-        onChangeType={handleChangeFilterType}
+        changeFilter={handleChangeFilterType}
       />
       <SearchContainer
         list={response}

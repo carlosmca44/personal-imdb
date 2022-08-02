@@ -2,11 +2,14 @@ import { Box as MuiBox } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 
 export const Box = styled(MuiBox)(({ theme }) => ({
+  height: 250,
   width: 200,
-  height: 300,
+  borderRadius: 0,
+  margin: "auto",
+  boxShadow: "5px 5px 5px #d4d4d4",
   [theme.breakpoints.down("sm")]: {
-    height: 100,
-    width: 66,
+    height: 200,
+    width: 166,
     textAlign: "center",
   },
   backgroundColor: "#454545",

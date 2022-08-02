@@ -36,11 +36,12 @@ export const SingleDetail = styled(Typography)(() => ({
 }));
 
 export const Poster = styled("img")(({ theme }) => ({
-  width: "auto",
-  height: "70vh",
+  maxWidth: 500,
+  maxHeight: "70vh",
   alignSelf: "center",
   [theme.breakpoints.down("sm")]: {
     alignSelf: "start",
+    maxWidth: 300
   },
   [theme.breakpoints.down("xs")]: {
     alignSelf: "center",

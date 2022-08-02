@@ -1,79 +1,67 @@
 import {
-  Button,
   Card as MuiCard,
+  CardActions as MuiCardActions,
   CardContent as MuiCardContent,
   CardMedia as MuiCardMedia,
-  Tooltip as MuiToolTip,
-  Typography
+  Typography,
 } from "@material-ui/core";
-import { styled } from "@material-ui/core/styles"
+import { styled } from "@material-ui/core/styles";
 
 export const FilmCardRoot = styled(MuiCard)(({ theme }) => ({
-  width: '200px',
-  maxHeight: '450px',
-  borderRadius: 0,
+  backgroundColor: "transparent",
+  width: "300px",
+  maxHeight: "350px",
+}));
+
+export const CardActions = styled(MuiCardActions)(({ theme }) => ({
+  flexDirection: "column",
+  margin: "1rem 0",
   [theme.breakpoints.down("sm")]: {
     display: "flex",
-    width: 340,
-    maxHeight: 100,
+    flexDirection: "column",
+    justifyContent: "center",
+    width: 300,
+    maxHeight: 300,
   },
-}))
+}));
 
-export const CardContent = styled(MuiCardContent)(({ theme }) => ({
-  backgroundColor: "#000",
-  color: "#fff",
-  [theme.breakpoints.down("sm")]: {
-    display: "flex",
-    width: "inherit",
-  },
-}))
-
-export const Tooltip = styled(MuiToolTip)(() => ({
-  maxWidth: 100,
-  backgroundColor: "#fff",
+export const CardContent = styled(MuiCardContent)(() => ({
   color: "#000",
-  fontWeight: 700,
-}))
+}));
 
 export const Tittle = styled(Typography)(() => ({
   backgroundColor: "transparent",
-  color: "#fff",
+  color: "#000",
   display: "-webkit-box",
   overflow: "hidden",
   lineClamp: 1,
   WebkitLineClamp: 1,
   WebkitBoxOrient: "vertical",
   fontWeight: 700,
-}))
-
-export const Texts = styled(Typography)(() => ({
-  display: "-webkit-box",
-  overflow: "hidden",
-  lineClamp: 1,
-  WebkitLineClamp: 1,
-  WebkitBoxOrient: "vertical",
-  fontWeight: 500,
-}))
-
-export const DetailsButton = styled(Button)(() => ({
-  width: 100,
-  height: 26,
-  backgroundColor: "#FDFF00",
-  color: "#000",
-  borderRadius: 8,
-  alignContent: "center",
+  fontSize: "1.2rem",
   "&:hover": {
-    color: "#fff",
-    border: "2px solid #FDFF00",
     cursor: "default",
   },
-}))
+}));
 
 export const CardMedia = styled(MuiCardMedia)(({ theme }) => ({
-  height: 300,
+  height: 250,
   width: 200,
+  borderRadius: 0,
+  margin: "auto",
+  boxShadow: "5px 5px 5px #d4d4d4",
   [theme.breakpoints.down("sm")]: {
-    height: 100,
-    width: 66,
+    height: 200,
+    width: 166,
   },
-}))
+  "&:hover": {
+    height: 230,
+    width: 160,
+    borderRadius: 0,
+    boxShadow: "10px 10px 15px #b0b0b0",
+    transition: "all 0.5s",
+  },
+  "&:not(:hover)": {
+    transition: "all 0.5s",
+  },
+}));

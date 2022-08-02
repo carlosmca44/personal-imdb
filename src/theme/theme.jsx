@@ -18,7 +18,7 @@ const theme = createTheme({
         },
         body: {
           margin: 0,
-          backgroundColor: '#252525',
+          backgroundColor: '#f4f4f4',
           fontFamily: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen',
             'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
             'sans-serif']

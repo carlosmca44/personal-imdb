@@ -1,6 +1,4 @@
-import {
-  IconButton,
-} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import PersonalLogo from "../svg/Logo";
 import { FaGithub, FaSearch } from "react-icons/fa";
 import {
@@ -11,8 +9,9 @@ import {
   ClearButton,
   GitLink
 } from "./styles";
+import Filters from "../Filters/Filters";
 
-const NavBar = ({ query, onClickButton, onChangeValue, clear }) => {
+const NavBar = ({ query, onClickButton, onChangeValue, clear, changeFilter }) => {
   return (
     <>
       <AppBar>
@@ -31,6 +30,9 @@ const NavBar = ({ query, onClickButton, onChangeValue, clear }) => {
               <FaSearch />
             </IconButton>
           </FormControl>
+          <Filters
+            onChangeType={changeFilter}
+          />
           <GitLink>
             <FaGithub />
           </GitLink>
