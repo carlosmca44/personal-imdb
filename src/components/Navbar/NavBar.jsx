@@ -1,13 +1,13 @@
-import { IconButton } from "@material-ui/core";
+import { IconButton, Link } from "@material-ui/core";
 import PersonalLogo from "../svg/Logo";
-import { FaGithub, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import {
   AppBar,
   Toolbar,
   FormControl,
   Input,
   ClearButton,
-  GitLink
+  GitHubIcon
 } from "./styles";
 import Filters from "../Filters/Filters";
 
@@ -23,19 +23,19 @@ const NavBar = ({ query, onClickButton, onChangeValue, clear, changeFilter }) =>
               onChange={onChangeValue}
               placeholder={"Buscar"}
               endAdornment={
-                <ClearButton onClick={clear} />
+                query ? <ClearButton onClick={clear} /> : <></>
               }
             />
-            <IconButton type="submit">
+            <IconButton style={{ display: query ? "block" : "none" }} type="submit">
               <FaSearch />
             </IconButton>
           </FormControl>
           <Filters
             onChangeType={changeFilter}
           />
-          <GitLink>
-            <FaGithub />
-          </GitLink>
+          <Link href="https://github.com/carlosmca44/personal-imdb" target="blank">
+            <GitHubIcon />
+          </Link>
         </Toolbar>
       </AppBar>
     </>

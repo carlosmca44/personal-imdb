@@ -1,12 +1,12 @@
 import {
   AppBar as MuiAppBar,
   FormControl as MuiFormControl,
-  IconButton,
   InputBase,
   Toolbar as MuiToolbar,
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { FaGithub } from "react-icons/fa";
 
 export const AppBar = styled(MuiAppBar)(({ theme }) => ({
   boxShadow: "none",
@@ -26,11 +26,14 @@ export const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   },
 }));
 
-export const FormControl = styled(MuiFormControl)(() => ({
+export const FormControl = styled(MuiFormControl)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   margin: "auto",
+  [theme.breakpoints.down("sm")]: {
+    margin: "1rem 0",
+  },
 }));
 
 export const Input = styled(InputBase)(({ theme }) => ({
@@ -53,10 +56,11 @@ export const ClearButton = styled(AiOutlineCloseCircle)(() => ({
   },
 }));
 
-export const GitLink = styled(IconButton)(({ theme }) => ({
-  width: 50,
-  height: 50,
+export const GitHubIcon = styled(FaGithub)(({ theme }) => ({
+  width: 40,
+  height: 40,
   marginLeft: 20,
+  color: "black",
   [theme.breakpoints.down("sm")]: {
     display: "none",
   },
